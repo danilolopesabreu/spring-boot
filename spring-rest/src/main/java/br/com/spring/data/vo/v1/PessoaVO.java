@@ -1,25 +1,12 @@
-package br.com.spring.model;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity(name = "pessoa")
-public class Pessoa {
+package br.com.spring.data.vo.v1;
+public class PessoaVO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "nome", nullable = false)
 	private String nome;
 	
-	@Column(name = "cpf", nullable = false)
 	private Integer cpf;
 	
-	@Column(name = "email", nullable = false)
 	private String email;
 
 	public Integer getId() {
