@@ -1,12 +1,13 @@
-package br.com.spring.data.vo.v1;
-public class PessoaVO {
-	
+package br.com.spring.pessoa.dto;
+
+public class PessoaDto {
+
 	private Integer id;
-	
+
 	private String nome;
-	
+
 	private Integer cpf;
-	
+
 	private String email;
 
 	public Integer getId() {

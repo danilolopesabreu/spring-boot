@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.spring.model.Pessoa;
+import br.com.spring.pessoa.dto.PessoaDto;
+import br.com.spring.pessoa.mapper.PessoaMapper;
 import br.com.spring.service.PessoaService;
 
 @RestController
@@ -24,9 +25,13 @@ public class PessoaController {
 	@Autowired
 	private PessoaService pessoaService;
 	
+	@Autowired
+	private PessoaMapper pessoaMapper;
+	
 	@GetMapping
-	public List<Pessoa> listarPessoas(){
-		return this.pessoaService.findAll();
+	public List<PessoaDto> listarPessoas(){
+		var pessoas = this.pessoaService.findAll();
+		return this.pessoaMapper.pessoasToPessoasDto(pessoas);
 	}
 	
 	@GetMapping("/{id}")
@@ -35,8 +40,10 @@ public class PessoaController {
 	}
 	
 	@PostMapping
-	public Pessoa criarPessoa(@RequestBody Pessoa pessoa) {
-		return this.pessoaService.create(pessoa);
+	public PessoaDto criarPessoa(@RequestBody PessoaDto pessoaDto) {
+		var novaPessoa = this.pessoaMapper.pessoaDtoToPessoa(pessoaDto);
+		var pessoaCadastrada = this.pessoaService.create(novaPessoa);
+		return this.pessoaMapper.pessoaToPessoaDto(pessoaCadastrada);
 	}
 
 	@PutMapping
