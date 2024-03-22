@@ -3,6 +3,7 @@ package br.com.spring.pessoa;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,11 @@ import br.com.spring.pessoa.mapper.PessoaMapper;
 import br.com.spring.service.PessoaService;
 
 @RestController
-@RequestMapping("/pessoa")
+@RequestMapping(
+		value = "/pessoa" 
+//		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
+//		consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }
+		)
 public class PessoaController {
 	
 	@Autowired
